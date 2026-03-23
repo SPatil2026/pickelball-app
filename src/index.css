@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --accent: #b8ff57;
+    --ink: #0d1117;
+    --ink-subtle: #21262d;
+    --ink-border: #30363d;
+    --ink-muted: #6e7681;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink text-white font-body antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(184,255,87,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 80% 80%, rgba(34,197,94,0.05) 0%, transparent 50%);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--ink);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--ink-subtle);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--ink-border);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-muted);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-display font-semibold text-sm tracking-wide transition-all duration-200;
+    background: var(--accent);
+    color: var(--ink);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(184,255,87,0.25);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-display font-medium text-sm tracking-wide transition-all duration-200 border border-ink-border text-white;
+  }
+  .btn-ghost:hover {
+    @apply border-white/30 bg-white/5;
+  }
+
+  .input-field {
+    @apply w-full bg-ink-subtle border border-ink-border rounded-lg px-4 py-3 text-sm font-body text-white placeholder-ink-muted outline-none transition-all duration-200;
+  }
+  .input-field:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(184,255,87,0.1);
+  }
+
+  .glass-card {
+    @apply rounded-2xl border border-ink-border bg-ink-subtle/60 backdrop-blur-sm;
+  }
+
+  .tag {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono font-medium;
+  }
+}
+
+
+/* Stagger animation helpers */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+
+

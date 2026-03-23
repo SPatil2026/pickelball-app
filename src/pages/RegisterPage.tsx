@@ -23,8 +23,9 @@ export function RegisterPage() {
     setError('')
     setLoading(true)
     try {
-      await register({ name, email, password, role, phone })
-      navigate('/dashboard')
+      const { user } = await register({ name, email, password, role, phone })
+      if (user?.role === 'OWNER') navigate('/owner/dashboard')
+      else navigate('/booker/home')
     } catch (err: unknown) {
       const msg =
         (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??

@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard,
   CalendarDays,
@@ -11,17 +11,25 @@ import {
 import clsx from 'clsx'
 import { useAuth } from '../../contexts/AuthContext'
 
-const navItems = [
-  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/courts', icon: CalendarDays, label: 'Book Courts' },
-  { to: '/history', icon: History, label: 'My Bookings' },
-  { to: '/marketplace', icon: Store, label: 'Marketplace' },
+const BOOKER_NAV = [
+  { to: '/booker/home', icon: Store, label: 'Marketplace' },
+  { to: '/booker/courts', icon: CalendarDays, label: 'Book Courts' },
+  { to: '/booker/history', icon: History, label: 'My Bookings' },
+  { to: '/settings', icon: Settings, label: 'Settings' },
+]
+
+const OWNER_NAV = [
+  { to: '/owner/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/settings', icon: Settings, label: 'Settings' },
 ]
 
 export function Sidebar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
+
+  const isOwner = user?.role === 'OWNER'
+  const navItems = isOwner ? OWNER_NAV : BOOKER_NAV
 
   const handleLogout = async () => {
     await logout()
@@ -40,26 +48,26 @@ export function Sidebar() {
 
       {/* Nav */}
       <nav className="flex-1 px-3 py-4 space-y-0.5">
-        {navItems.map(({ to, icon: Icon, label }) => (
-          <NavLink
-            key={to}
-            to={to}
-            className={({ isActive }) =>
-              clsx(
+        {navItems.map(({ to, icon: Icon, label }) => {
+          const isActive = location.pathname.startsWith(to)
+          
+          return (
+            <NavLink
+              key={to}
+              to={to}
+              className={clsx(
                 'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-body font-medium transition-all duration-150',
                 isActive
                   ? 'text-ink font-semibold'
                   : 'text-ink-muted hover:text-white hover:bg-ink-subtle'
-              )
-            }
-            style={({ isActive }) =>
-              isActive ? { background: 'var(--accent)', color: 'var(--ink)' } : {}
-            }
-          >
-            <Icon size={16} strokeWidth={isActiveCheck(to) ? 2.5 : 1.8} />
-            {label}
-          </NavLink>
-        ))}
+              )}
+              style={isActive ? { background: 'var(--accent)', color: 'var(--ink)' } : {}}
+            >
+              <Icon size={16} strokeWidth={isActive ? 2.5 : 1.8} />
+              {label}
+            </NavLink>
+          )
+        })}
       </nav>
 
       {/* User footer */}
@@ -83,9 +91,4 @@ export function Sidebar() {
       </div>
     </aside>
   )
-}
-
-// tiny helper so NavLink icon strokeWidth works
-function isActiveCheck(_to: string) {
-  return window.location.pathname === _to
 }

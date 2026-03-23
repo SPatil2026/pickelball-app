@@ -1,6 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import { OwnerRoute } from './components/OwnerRoute'
+import { BookerRoute } from './components/BookerRoute'
 import { AppLayout } from './components/layout/AppLayout'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
@@ -18,16 +20,25 @@ export default function App() {
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
-            <Route path="/dashboard"   element={<DashboardPage />} />
-            <Route path="/courts"      element={<CourtsPage />} />
-            <Route path="/history"     element={<HistoryPage />} />
-            <Route path="/marketplace" element={<MarketplacePage />} />
-            <Route path="/settings"    element={<SettingsPage />} />
+            
+            {/* Owner Section */}
+            <Route element={<OwnerRoute />}>
+              <Route path="/owner/dashboard" element={<DashboardPage />} />
+            </Route>
+
+            {/* Booker Section */}
+            <Route element={<BookerRoute />}>
+              <Route path="/booker/home" element={<MarketplacePage />} />
+              <Route path="/booker/history" element={<HistoryPage />} />
+              <Route path="/booker/courts" element={<CourtsPage />} />
+            </Route>
+
+            <Route path="/settings" element={<SettingsPage />} />
           </Route>
         </Route>
 
         {/* Fallback */}
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </AuthProvider>
   )

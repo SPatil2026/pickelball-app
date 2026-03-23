@@ -19,8 +19,9 @@ export function LoginPage() {
     setError('')
     setLoading(true)
     try {
-      await login({ email, password })
-      navigate('/dashboard')
+      const { user } = await login({ email, password })
+      if (user?.role === 'OWNER') navigate('/owner/dashboard')
+      else navigate('/booker/home')
     } catch (err: unknown) {
       const msg =
         (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??

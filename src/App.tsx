@@ -4,26 +4,44 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { OwnerRoute } from './components/OwnerRoute'
 import { BookerRoute } from './components/BookerRoute'
 import { AppLayout } from './components/layout/AppLayout'
-import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
-import { DashboardPage } from './pages/DashboardPage'
-import { CourtsPage, HistoryPage, MarketplacePage, SettingsPage } from './pages/PlaceholderPages'
+
+// Owner Pages
+import { OwnerDashboardPage } from './pages/owner/OwnerDashboardPage'
+import { MyVenuesPage } from './pages/owner/MyVenuesPage'
+import { ManageCourtsPage } from './pages/owner/ManageCourtsPage'
+import { ManageVenuePage } from './pages/owner/ManageVenuePage'
+import { EditVenuePage } from './pages/owner/EditVenuePage'
+import { OwnerBookingsPage } from './pages/owner/OwnerBookingsPage'
+import { AddVenuePage } from './pages/owner/AddVenuePage'
+
+// Placeholders
+import {
+  CourtsPage, HistoryPage, MarketplacePage, SettingsPage
+} from './pages/PlaceholderPages'
+import { LoginPage } from './pages/LoginPage'
 
 export default function App() {
   return (
     <AuthProvider>
       <Routes>
         {/* Public routes */}
-        <Route path="/login"    element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
-            
+
             {/* Owner Section */}
             <Route element={<OwnerRoute />}>
-              <Route path="/owner/dashboard" element={<DashboardPage />} />
+              <Route path="/owner/dashboard" element={<OwnerDashboardPage />} />
+              <Route path="/owner/venues" element={<MyVenuesPage />} />
+              <Route path="/owner/add-venue" element={<AddVenuePage />} />
+              <Route path="/owner/venue/:id" element={<ManageVenuePage />} />
+              <Route path="/owner/venue/:id/edit" element={<EditVenuePage />} />
+              <Route path="/owner/bookings" element={<OwnerBookingsPage />} />
+              <Route path="/owner/manage-courts" element={<ManageCourtsPage />} />
             </Route>
 
             {/* Booker Section */}

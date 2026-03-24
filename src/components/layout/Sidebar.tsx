@@ -20,6 +20,9 @@ const BOOKER_NAV = [
 
 const OWNER_NAV = [
   { to: '/owner/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+  { to: '/owner/venues', icon: Store, label: 'My Venues' },
+  { to: '/owner/bookings', icon: CalendarDays, label: 'My Bookings' },
+  { to: '/owner/manage-courts', icon: Settings, label: 'Manage Courts' },
   { to: '/settings', icon: Settings, label: 'Settings' },
 ]
 

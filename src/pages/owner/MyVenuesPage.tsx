@@ -93,10 +93,15 @@ export function MyVenuesPage() {
                   ) : (
                     <Store size={32} className="text-zinc-800 absolute" />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/80 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent" />
+
+                  {/* Courts badge */}
                   <div className="absolute top-3 right-3 flex gap-2">
-                    <span className="tag text-[10px] px-2 py-0.5" style={{ background: 'rgba(255,255,255,0.1)', color: 'white' }}>
-                      {venue.courts.length} Courts
+                    <span
+                      className="text-[10px] px-2.5 py-1 rounded-full font-mono uppercase font-medium backdrop-blur-md"
+                      style={{ background: 'rgba(255,255,255,0.12)', color: 'white', border: '1px solid rgba(255,255,255,0.12)' }}
+                    >
+                      {venue.courts.length} Court{venue.courts.length !== 1 ? 's' : ''}
                     </span>
                   </div>
                 </div>

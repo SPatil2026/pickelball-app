@@ -105,4 +105,12 @@ export const uploadApi = {
     api.put(`/owner/upload/venues/images/${imageId}/thumbnail`).then((r) => r.data),
 }
 
+export const bookerApi = {
+  getVenues: (params?: { date?: string; time?: string }) =>
+    api.get('/booker/venues', { params }).then((r) => r.data),
+
+  getVenueById: (venueId: string) =>
+    api.get(`/booker/venues/${venueId}`).then((r) => r.data),
+}
+
 export default api

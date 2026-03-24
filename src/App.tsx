@@ -14,10 +14,12 @@ import { ManageVenuePage } from './pages/owner/ManageVenuePage'
 import { EditVenuePage } from './pages/owner/EditVenuePage'
 import { OwnerBookingsPage } from './pages/owner/OwnerBookingsPage'
 import { AddVenuePage } from './pages/owner/AddVenuePage'
+import { MarketplacePage } from './pages/booker/MarketplacePage'
+import { VenueDetailPage } from './pages/booker/VenueDetailPage'
 
 // Placeholders
 import {
-  CourtsPage, HistoryPage, MarketplacePage, SettingsPage
+  CourtsPage, HistoryPage, SettingsPage
 } from './pages/PlaceholderPages'
 import { LoginPage } from './pages/LoginPage'
 
@@ -47,6 +49,7 @@ export default function App() {
             {/* Booker Section */}
             <Route element={<BookerRoute />}>
               <Route path="/booker/home" element={<MarketplacePage />} />
+              <Route path="/booker/venue/:id" element={<VenueDetailPage />} />
               <Route path="/booker/history" element={<HistoryPage />} />
               <Route path="/booker/courts" element={<CourtsPage />} />
             </Route>

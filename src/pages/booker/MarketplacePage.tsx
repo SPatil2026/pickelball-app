@@ -49,17 +49,18 @@ export function MarketplacePage() {
     setLoading(true)
     setError('')
     try {
-      const params: { date?: string; time?: string } = {}
+      const params: { date?: string; time?: string; address?: string } = {}
       if (date) params.date = date
       if (time) params.time = time.length === 5 ? `${time}:00` : time  // ensure HH:MM:SS
+      if (search) params.address = search
       const data = await bookerApi.getVenues(Object.keys(params).length ? params : undefined)
       setVenues(Array.isArray(data) ? data : [])
-    } catch {
-      setError('Failed to load venues. Please try again.')
+    } catch (err: any) {
+      setError(err.response?.data?.msg || 'Failed to load venues. Please try again.')
     } finally {
       setLoading(false)
     }
-  }, [date, time])
+  }, [date, time, search])
 
   useEffect(() => {
     fetchVenues()
@@ -93,11 +94,10 @@ export function MarketplacePage() {
           </div>
           <button
             onClick={() => setFiltersOpen(!filtersOpen)}
-            className={`h-11 px-4 rounded-lg border transition-all flex items-center gap-2 text-sm font-medium ${
-              filtersOpen || date || time
-                ? 'border-accent/50 text-accent bg-accent/10'
-                : 'border-ink-border text-ink-muted hover:text-white hover:bg-ink-subtle'
-            }`}
+            className={`h-11 px-4 rounded-lg border transition-all flex items-center gap-2 text-sm font-medium ${filtersOpen || date || time
+              ? 'border-accent/50 text-accent bg-accent/10'
+              : 'border-ink-border text-ink-muted hover:text-white hover:bg-ink-subtle'
+              }`}
           >
             <SlidersHorizontal size={15} />
             Filters
@@ -158,8 +158,8 @@ export function MarketplacePage() {
             {search
               ? `No venues match "${search}". Try a different search.`
               : time
-              ? 'No courts are available at the requested date and time. Try a different slot.'
-              : 'No venues are currently listed. Check back soon!'}
+                ? 'No courts are available at the requested date and time. Try a different slot.'
+                : 'No venues are currently listed. Check back soon!'}
           </p>
           {(search || time) && (
             <button

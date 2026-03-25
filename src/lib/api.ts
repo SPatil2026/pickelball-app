@@ -106,11 +106,28 @@ export const uploadApi = {
 }
 
 export const bookerApi = {
-  getVenues: (params?: { date?: string; time?: string }) =>
+  getVenues: (params?: { date?: string; time?: string; address?: string; }) =>
     api.get('/booker/venues', { params }).then((r) => r.data),
 
   getVenueById: (venueId: string) =>
     api.get(`/booker/venues/${venueId}`).then((r) => r.data),
+
+  getAvailableSlots: (venueId: string, date: string) =>
+    api.get(`/booker/venues/${venueId}/slots`, { params: { date } }).then((r) => r.data),
+}
+
+export const cartApi = {
+  getCart: () =>
+    api.get('/booker/cart').then((r) => r.data),
+
+  addToCart: (data: { court_id: string; date: string; start_time: string; end_time: string }) =>
+    api.post('/booker/cart', data).then((r) => r.data),
+
+  removeFromCart: (cartItemId: string) =>
+    api.delete(`/booker/cart/${cartItemId}`).then((r) => r.data),
+
+  clearCart: () =>
+    api.delete('/booker/cart/clear-all').then((r) => r.data),
 }
 
 export default api

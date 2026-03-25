@@ -4,6 +4,7 @@ import {
   CalendarDays,
   History,
   Store,
+  ShoppingCart,
   Settings,
   LogOut,
   Zap,
@@ -13,7 +14,7 @@ import { useAuth } from '../../contexts/AuthContext'
 
 const BOOKER_NAV = [
   { to: '/booker/home', icon: Store, label: 'Marketplace' },
-  { to: '/booker/courts', icon: CalendarDays, label: 'Book Courts' },
+  { to: '/booker/cart', icon: ShoppingCart, label: 'My Cart' },
   { to: '/booker/history', icon: History, label: 'My Bookings' },
   { to: '/settings', icon: Settings, label: 'Settings' },
 ]
@@ -53,7 +54,7 @@ export function Sidebar() {
       <nav className="flex-1 px-3 py-4 space-y-0.5">
         {navItems.map(({ to, icon: Icon, label }) => {
           const isActive = location.pathname.startsWith(to)
-          
+
           return (
             <NavLink
               key={to}

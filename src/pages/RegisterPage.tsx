@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, Zap, ArrowRight, Check } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
-import type { Role } from '../types'
+import { Role } from '../types'
 import clsx from 'clsx'
 
 export function RegisterPage() {
@@ -12,7 +12,7 @@ export function RegisterPage() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState<Role>('BOOKER')
+  const [role, setRole] = useState<Role>(Role.BOOKER)
   const [showPw, setShowPw] = useState(false)
   const [phone, setPhone] = useState('')
   const [error, setError] = useState('')
@@ -24,7 +24,7 @@ export function RegisterPage() {
     setLoading(true)
     try {
       const { user } = await register({ name, email, password, role, phone })
-      if (user?.role === 'OWNER') navigate('/owner/dashboard')
+      if (user?.role === Role.OWNER) navigate('/owner/dashboard')
       else navigate('/booker/home')
     } catch (err: unknown) {
       const msg =
@@ -172,7 +172,7 @@ export function RegisterPage() {
                 I am a…
               </label>
               <div className="grid grid-cols-2 gap-2">
-                {(['BOOKER', 'OWNER'] as Role[]).map((r) => (
+                {(Object.values(Role) as Role[]).map((r) => (
                   <button
                     key={r}
                     type="button"
@@ -185,10 +185,10 @@ export function RegisterPage() {
                     )}
                     style={role === r ? { background: 'var(--accent)' } : {}}
                   >
-                    <span className="text-base mb-0.5">{r === 'BOOKER' ? '🏓' : '🏟️'}</span>
+                    <span className="text-base mb-0.5">{r === Role.BOOKER ? '🏓' : '🏟️'}</span>
                     <span className="capitalize">{r}</span>
                     <span className="text-xs opacity-70 font-normal">
-                      {r === 'BOOKER' ? 'Book courts' : 'Manage venues'}
+                      {r === Role.BOOKER ? 'Book courts' : 'Manage venues'}
                     </span>
                   </button>
                 ))}

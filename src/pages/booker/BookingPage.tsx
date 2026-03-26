@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowLeft, ShoppingCart, CalendarDays, CheckCircle } from 'lucide-react'
 import { bookerApi, cartApi } from '../../lib/api'
+import { fmtTime } from '../../components/FormatDateTime'
 
 interface CourtAvailability {
     court_id: string
@@ -16,15 +17,6 @@ interface TimeSlot {
 }
 
 const todayStr = () => new Date().toISOString().slice(0, 10)
-
-const fmtTime = (isoOrTime: string) => {
-    if (!isoOrTime) return ''
-    if (isoOrTime.includes('T')) {
-        const d = new Date(isoOrTime)
-        return `${d.getUTCHours().toString().padStart(2, '0')}:${d.getUTCMinutes().toString().padStart(2, '0')}`
-    }
-    return isoOrTime.slice(0, 5)
-}
 
 const STATUS_STYLE: Record<string, string> = {
     AVAILABLE: 'border-accent/40 bg-accent/10 text-accent hover:bg-accent hover:text-ink cursor-pointer',

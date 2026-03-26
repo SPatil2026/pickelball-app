@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { ownerApi } from '../../lib/api'
 import { CalendarDays, Clock, User, CheckCircle, Navigation } from 'lucide-react'
+import { fmtTime } from '../../components/FormatDateTime'
 
 interface Booking {
   booking_id: string
@@ -41,22 +42,6 @@ export function OwnerBookingsPage() {
       setError('Failed to load bookings.')
     } finally {
       setLoading(false)
-    }
-  }
-
-  // Helper to format time strings from full DateTime strings or just "HH:mm:ss"
-  const formatTime = (timeStr: string) => {
-    if (!timeStr) return ''
-    try {
-      // If it's a full ISO date string, the HH:mm is extractable
-      if (timeStr.includes('T')) {
-        const d = new Date(timeStr)
-        return `${d.getUTCHours().toString().padStart(2, '0')}:${d.getUTCMinutes().toString().padStart(2, '0')}`
-      }
-      // If it's already HH:mm:ss
-      return timeStr.slice(0, 5)
-    } catch {
-      return timeStr
     }
   }
 
@@ -155,7 +140,7 @@ export function OwnerBookingsPage() {
                         {new Date(booking.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                       </p>
                       <p className="text-xs text-ink-muted mt-0.5 flex items-center gap-1">
-                        <Clock size={12} /> {formatTime(booking.start_time)} - {formatTime(booking.end_time)}
+                        <Clock size={12} /> {fmtTime(booking.start_time)} - {fmtTime(booking.end_time)}
                       </p>
                     </td>
 

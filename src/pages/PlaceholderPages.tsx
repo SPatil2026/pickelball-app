@@ -32,6 +32,3 @@ export function MarketplacePage() {
   return <Placeholder title="Venue Marketplace" description="Browse venues near you, filter by availability, and book instantly." />
 }
 
-export function SettingsPage() {
-  return <Placeholder title="Settings" description="Manage your profile, notification preferences, and payment methods." />
-}

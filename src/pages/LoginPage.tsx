@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, Zap, ArrowRight } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 import clsx from 'clsx'
+import { Role } from '../types'
 
 export function LoginPage() {
   const { login } = useAuth()
@@ -20,7 +21,7 @@ export function LoginPage() {
     setLoading(true)
     try {
       const { user } = await login({ email, password })
-      if (user?.role === 'OWNER') navigate('/owner/dashboard')
+      if (user?.role === Role.OWNER) navigate('/owner/dashboard')
       else navigate('/booker/home')
     } catch (err: unknown) {
       const msg =

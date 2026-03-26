@@ -5,18 +5,18 @@ import {
   History,
   Store,
   ShoppingCart,
-  Settings,
   LogOut,
   Zap,
+  Settings,
 } from 'lucide-react'
 import clsx from 'clsx'
 import { useAuth } from '../../contexts/AuthContext'
+import { Role } from '../../types'
 
 const BOOKER_NAV = [
   { to: '/booker/home', icon: Store, label: 'Marketplace' },
   { to: '/booker/cart', icon: ShoppingCart, label: 'My Cart' },
   { to: '/booker/history', icon: History, label: 'My Bookings' },
-  { to: '/settings', icon: Settings, label: 'Settings' },
 ]
 
 const OWNER_NAV = [
@@ -24,7 +24,6 @@ const OWNER_NAV = [
   { to: '/owner/venues', icon: Store, label: 'My Venues' },
   { to: '/owner/bookings', icon: CalendarDays, label: 'My Bookings' },
   { to: '/owner/manage-courts', icon: Settings, label: 'Manage Courts' },
-  { to: '/settings', icon: Settings, label: 'Settings' },
 ]
 
 export function Sidebar() {
@@ -32,7 +31,7 @@ export function Sidebar() {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const isOwner = user?.role === 'OWNER'
+  const isOwner = user?.role === Role.OWNER
   const navItems = isOwner ? OWNER_NAV : BOOKER_NAV
 
   const handleLogout = async () => {

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { MapPin, Phone, Mail, Clock, ArrowLeft, Store, Tag } from 'lucide-react'
 import { bookerApi } from '../../lib/api'
+import { fmtTime } from '../../components/FormatDateTime'
 
 interface Pricing {
   day_type: string
@@ -18,15 +19,6 @@ interface VenueDetail {
   images: { image_url: string; is_thumbnail: boolean }[]
   pricing: Pricing[]
   _count: { courts: number }
-}
-
-const formatTime = (dt: string) => {
-  if (!dt) return ''
-  if (dt.includes('T')) {
-    const d = new Date(dt)
-    return `${d.getUTCHours().toString().padStart(2, '0')}:${d.getUTCMinutes().toString().padStart(2, '0')}`
-  }
-  return dt.slice(0, 5)
 }
 
 const DAY_TYPE_LABEL: Record<string, string> = {
@@ -115,9 +107,8 @@ export function VenueDetailPage() {
               <button
                 key={img.image_url}
                 onClick={() => setActiveImage(i)}
-                className={`shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
-                  i === activeImage ? 'border-accent' : 'border-ink-border opacity-60 hover:opacity-100'
-                }`}
+                className={`shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${i === activeImage ? 'border-accent' : 'border-ink-border opacity-60 hover:opacity-100'
+                  }`}
               >
                 <img src={img.image_url} alt="" className="w-full h-full object-cover" />
               </button>
@@ -139,7 +130,7 @@ export function VenueDetailPage() {
               </span>
               <span className="flex items-center gap-2 text-sm text-ink-muted">
                 <Clock size={15} className="shrink-0" />
-                Open {formatTime(venue.opening_time)} – {formatTime(venue.closing_time)}
+                Open {fmtTime(venue.opening_time)} – {fmtTime(venue.closing_time)}
               </span>
               {venue.contact_number && (
                 <span className="flex items-center gap-2 text-sm text-ink-muted">

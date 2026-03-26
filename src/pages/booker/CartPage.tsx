@@ -3,26 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ShoppingCart, Trash2, MapPin, Clock, AlertCircle, ArrowRight } from 'lucide-react'
 import { cartApi } from '../../lib/api'
 import { fmtDate, fmtTime } from '../../components/FormatDateTime'
-
-interface CartItem {
-  cart_item_id: string
-  date: string
-  start_time: string
-  end_time: string
-  price: number
-  court: {
-    court_number: number
-    venue: {
-      name: string
-      address: string
-    }
-  }
-}
-
-interface Cart {
-  cart_id: string
-  items: CartItem[]
-}
+import { Cart } from '../../types'
 
 export function CartPage() {
   const navigate = useNavigate()

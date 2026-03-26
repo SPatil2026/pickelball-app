@@ -24,6 +24,7 @@ import { BookingPage } from './pages/booker/BookingPage'
 import { CartPage } from './pages/booker/CartPage'
 import { CheckoutPage } from './pages/booker/CheckoutPage'
 import { CancelPage } from './pages/booker/CancelPage'
+import { ReschedulePage } from './pages/booker/ReschedulePage'
 
 export default function App() {
   return (
@@ -57,6 +58,7 @@ export default function App() {
               <Route path="/booker/checkout" element={<CheckoutPage />} />
               <Route path="/booker/history" element={<HistoryPage />} />
               <Route path="/booker/booking/:id/cancel" element={<CancelPage />} />
+              <Route path="/booker/booking/:id/reschedule" element={<ReschedulePage />} />
             </Route>
 
           </Route>

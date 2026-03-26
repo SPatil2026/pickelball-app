@@ -53,7 +53,10 @@ export interface Booking {
   is_cancel_eligible: boolean
   reschedule_ineligible_reason: string | null
   cancel_ineligible_reason: string | null
+  court_id: string
   court: {
+    court_id: string
+    venue_id: string
     court_number: number
     venue: {
       name: string

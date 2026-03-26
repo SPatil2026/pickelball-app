@@ -141,7 +141,11 @@ export const bookingsApi = {
     api.post(`/booker/bookings/${bookingId}/cancel`).then((r) => r.data),
 
   rescheduleBooking: (bookingId: string, data: { date: string; start_time: string; end_time: string }) =>
-    api.post(`/booker/bookings/${bookingId}/reschedule`, data).then((r) => r.data),
+    api.post(`/booker/bookings/${bookingId}/reschedule`, {
+      new_date: data.date,
+      new_start_time: data.start_time,
+      new_end_time: data.end_time
+    }).then((r) => r.data),
 }
 
 export default api

@@ -1,8 +1,9 @@
+/// <reference types="vite/client" />
 import axios from 'axios'
 import type { AuthResponse, LoginPayload, RegisterPayload } from '../types'
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 })

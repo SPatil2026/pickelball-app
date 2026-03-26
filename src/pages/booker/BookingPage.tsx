@@ -21,7 +21,7 @@ const todayStr = () => new Date().toISOString().slice(0, 10)
 const STATUS_STYLE: Record<string, string> = {
     AVAILABLE: 'border-accent/40 bg-accent/10 text-accent hover:bg-accent hover:text-ink cursor-pointer',
     BOOKED: 'border-red-500/30 bg-red-500/10 text-red-400/60 cursor-not-allowed',
-    BLOCKED: 'border-white/10 bg-white/5 text-ink-muted/50 cursor-not-allowed',
+    BLOCKED: 'border-primary/10 bg-primary/5 text-ink-muted/50 cursor-not-allowed',
     IN_CART: 'border-sky-400/40 bg-sky-400/10 text-sky-400 cursor-not-allowed',
     SELECTED: 'border-accent bg-accent text-ink shadow-[0_0_14px_rgba(184,255,87,0.3)] cursor-pointer',
 }
@@ -129,7 +129,7 @@ export function BookingPage() {
             {/* Back */}
             <button
                 onClick={() => navigate(`/booker/venue/${venueId}`)}
-                className="flex items-center gap-2 text-ink-muted hover:text-white transition-colors text-sm font-medium group"
+                className="flex items-center gap-2 text-ink-muted hover:text-primary transition-colors text-sm font-medium group"
             >
                 <ArrowLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />
                 Back to Venue
@@ -161,7 +161,7 @@ export function BookingPage() {
                     { label: 'Selected', cls: 'border-accent bg-accent text-ink' },
                     { label: 'In cart', cls: 'border-sky-400/40 bg-sky-400/10 text-sky-400' },
                     { label: 'Booked', cls: 'border-red-500/30 bg-red-500/10 text-red-400/70' },
-                    { label: 'Blocked', cls: 'border-white/10 bg-white/5 text-ink-muted/50' },
+                    { label: 'Blocked', cls: 'border-primary/10 bg-primary/5 text-ink-muted/50' },
                 ].map(({ label, cls }) => (
                     <span key={label} className={`px-3 py-1 rounded-full border font-mono uppercase ${cls}`}>{label}</span>
                 ))}
@@ -217,7 +217,7 @@ export function BookingPage() {
 
                         <tbody className="divide-y divide-ink-border">
                             {slots.map((slot, slotIdx) => (
-                                <tr key={slot.start_time} className="hover:bg-white/5 transition-colors">
+                                <tr key={slot.start_time} className="hover:bg-primary/5 transition-colors">
                                     {/* Time label */}
                                     <td className="px-4 py-2.5 text-xs text-ink-muted font-mono whitespace-nowrap">
                                         {fmtTime(slot.start_time)} – {fmtTime(slot.end_time)}

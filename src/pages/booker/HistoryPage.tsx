@@ -44,7 +44,7 @@ export function HistoryPage() {
             onClick={() => setFilter(key)}
             className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${filter === key
               ? 'text-ink font-semibold'
-              : 'text-ink-muted hover:text-white'
+              : 'text-ink-muted hover:text-primary'
               }`}
             style={filter === key ? { background: 'var(--accent)', color: 'var(--ink)' } : {}}
           >

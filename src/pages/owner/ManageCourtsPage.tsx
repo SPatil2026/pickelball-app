@@ -120,10 +120,10 @@ export function ManageCourtsPage() {
                   }}
                   className={`w-full text-left p-4 rounded-xl border transition-all ${selectedVenueId === venue.venue_id
                     ? 'border-accent bg-accent/5'
-                    : 'border-ink-border bg-ink-subtle hover:bg-white/5'
+                    : 'border-ink-border bg-ink-subtle hover:bg-primary/5'
                     }`}
                 >
-                  <p className={`font-medium text-sm truncate ${selectedVenueId === venue.venue_id ? 'text-accent' : 'text-white'}`}>
+                  <p className={`font-medium text-sm truncate ${selectedVenueId === venue.venue_id ? 'text-accent' : 'text-primary'}`}>
                     {venue.name}
                   </p>
                   <div className="flex items-center gap-1.5 mt-2">

@@ -12,7 +12,7 @@ export function BookingCard({ booking }: { booking: Booking }) {
     const StatusIcon = cfg.icon
 
     return (
-        <div className="glass-card overflow-hidden hover:border-white/15 transition-all">
+        <div className="glass-card overflow-hidden hover:border-primary/15 transition-all">
             {/* Main row */}
             <div className="p-5 flex items-start gap-4">
                 {/* Status icon */}
@@ -57,7 +57,7 @@ export function BookingCard({ booking }: { booking: Booking }) {
                 {booking.reschedules.length > 0 && (
                     <button
                         onClick={() => setExpanded(!expanded)}
-                        className="text-ink-muted hover:text-white transition-colors shrink-0 mt-1"
+                        className="text-ink-muted hover:text-primary transition-colors shrink-0 mt-1"
                     >
                         {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                     </button>
@@ -83,7 +83,7 @@ export function BookingCard({ booking }: { booking: Booking }) {
                     {booking.is_reschedule_eligible ? (
                         <button
                             onClick={() => navigate(`/booker/booking/${booking.booking_id}/reschedule`)}
-                            className="flex items-center gap-1.5 text-xs text-ink-muted hover:text-white border border-ink-border hover:border-white/20 px-3 py-1.5 rounded-lg transition-all"
+                            className="flex items-center gap-1.5 text-xs text-ink-muted hover:text-primary border border-ink-border hover:border-primary/20 px-3 py-1.5 rounded-lg transition-all"
                         >
                             <RefreshCw size={12} />
                             Reschedule

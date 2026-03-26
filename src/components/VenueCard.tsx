@@ -13,7 +13,7 @@ export const VenueCard = ({ venue }: VenueCardProps) => {
 
     return (
         <div
-            className="glass-card overflow-hidden flex flex-col hover:border-white/20 transition-all duration-300 group cursor-pointer"
+            className="glass-card overflow-hidden flex flex-col hover:border-primary/20 transition-all duration-300 group cursor-pointer"
             onClick={() => navigate(`/booker/venue/${venue.venue_id}`)}
         >
             {/* Cover image */}
@@ -45,7 +45,7 @@ export const VenueCard = ({ venue }: VenueCardProps) => {
 
                 {/* Venue name overlay */}
                 <div className="absolute bottom-3 left-4 right-4">
-                    <h3 className="font-display font-700 text-white text-lg leading-tight drop-shadow-lg truncate group-hover:text-accent transition-colors">
+                    <h3 className="font-display font-700 text-primary text-lg leading-tight drop-shadow-lg truncate group-hover:text-accent transition-colors">
                         {venue.name}
                     </h3>
                 </div>

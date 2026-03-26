@@ -69,7 +69,7 @@ export function OwnerBookingsPage() {
           {dateFilter && (
             <button
               onClick={() => setDateFilter('')}
-              className="text-xs text-ink-muted hover:text-white transition-colors underline"
+              className="text-xs text-ink-muted hover:text-primary transition-colors underline"
             >
               Clear
             </button>
@@ -88,7 +88,7 @@ export function OwnerBookingsPage() {
         </div>
       ) : bookings.length === 0 ? (
         <div className="glass-card p-12 flex flex-col items-center text-center">
-          <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
+          <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center mb-4">
             <CalendarDays size={24} className="text-ink-muted" />
           </div>
           <h3 className="font-display font-600 text-lg mb-2">No bookings found</h3>
@@ -102,7 +102,7 @@ export function OwnerBookingsPage() {
         <div className="bg-ink-subtle border border-ink-border rounded-xl overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-white/5 font-mono text-xs uppercase tracking-widest text-ink-muted border-b border-ink-border">
+              <thead className="bg-primary/5 font-mono text-xs uppercase tracking-widest text-ink-muted border-b border-ink-border">
                 <tr>
                   <th className="px-6 py-4 font-medium">Customer Details</th>
                   <th className="px-6 py-4 font-medium">Court & Venue</th>
@@ -112,7 +112,7 @@ export function OwnerBookingsPage() {
               </thead>
               <tbody className="divide-y divide-ink-border">
                 {bookings.map((booking) => (
-                  <tr key={booking.booking_id} className="hover:bg-white/5 transition-colors">
+                  <tr key={booking.booking_id} className="hover:bg-primary/5 transition-colors">
                     {/* Customer */}
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
@@ -120,7 +120,7 @@ export function OwnerBookingsPage() {
                           <User size={14} />
                         </div>
                         <div>
-                          <p className="font-medium text-white">{booking.user?.name || 'Unknown'}</p>
+                          <p className="font-medium text-primary">{booking.user?.name || 'Unknown'}</p>
                           <p className="text-xs text-ink-muted tracking-wide mt-0.5">{booking.user?.phone || 'No phone'}</p>
                         </div>
                       </div>
@@ -128,7 +128,7 @@ export function OwnerBookingsPage() {
 
                     {/* Venue */}
                     <td className="px-6 py-4">
-                      <p className="font-medium text-white">{booking.court?.venue?.name}</p>
+                      <p className="font-medium text-primary">{booking.court?.venue?.name}</p>
                       <p className="text-xs text-ink-muted mt-0.5 flex items-center gap-1">
                         <Navigation size={12} className="inline" /> Court {booking.court?.court_number}
                       </p>
@@ -136,7 +136,7 @@ export function OwnerBookingsPage() {
 
                     {/* Time */}
                     <td className="px-6 py-4">
-                      <p className="font-medium text-white whitespace-nowrap">
+                      <p className="font-medium text-primary whitespace-nowrap">
                         {new Date(booking.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                       </p>
                       <p className="text-xs text-ink-muted mt-0.5 flex items-center gap-1">

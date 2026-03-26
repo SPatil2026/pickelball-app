@@ -86,6 +86,7 @@ export interface CartItem {
   start_time: string
   end_time: string
   price: number
+  is_booked?: boolean
   court: {
     court_number: number
     venue: {

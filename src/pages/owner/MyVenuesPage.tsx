@@ -67,7 +67,7 @@ export function MyVenuesPage() {
           </div>
         ) : venues.length === 0 ? (
           <div className="glass-card p-12 flex flex-col items-center text-center">
-            <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
+            <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center mb-4">
               <Store size={24} className="text-ink-muted" />
             </div>
             <h3 className="font-display font-600 text-lg mb-2">No venues listed yet</h3>
@@ -81,7 +81,7 @@ export function MyVenuesPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {venues.map((venue) => (
-              <div key={venue.venue_id} className="glass-card overflow-hidden flex flex-col hover:border-white/20 transition-all group">
+              <div key={venue.venue_id} className="glass-card overflow-hidden flex flex-col hover:border-primary/20 transition-all group">
                 {/* Img placeholder or Cover */}
                 <div className="h-40 bg-zinc-900 border-b border-ink-border flex items-center justify-center relative overflow-hidden">
                   {venue.images && venue.images.length > 0 ? (
@@ -129,7 +129,7 @@ export function MyVenuesPage() {
                   </div>
 
                   <div className="mt-auto pt-6 grid grid-cols-2 gap-2">
-                    <Link to={`/owner/venue/${venue.venue_id}/edit`} className="btn-ghost h-9 px-3 text-xs justify-center border border-ink-border bg-white/5">
+                    <Link to={`/owner/venue/${venue.venue_id}/edit`} className="btn-ghost h-9 px-3 text-xs justify-center border border-ink-border bg-primary/5">
                       Edit details
                     </Link>
                     <Link to={`/owner/venue/${venue.venue_id}`} className="btn-primary h-9 px-3 text-xs justify-center">

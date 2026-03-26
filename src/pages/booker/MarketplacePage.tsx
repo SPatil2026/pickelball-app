@@ -70,7 +70,7 @@ export function MarketplacePage() {
             onClick={() => setFiltersOpen(!filtersOpen)}
             className={`h-11 px-4 rounded-lg border transition-all flex items-center gap-2 text-sm font-medium ${filtersOpen || date || time
               ? 'border-accent/50 text-accent bg-accent/10'
-              : 'border-ink-border text-ink-muted hover:text-white hover:bg-ink-subtle'
+              : 'border-ink-border text-ink-muted hover:text-primary hover:bg-ink-subtle'
               }`}
           >
             <SlidersHorizontal size={15} />
@@ -104,7 +104,7 @@ export function MarketplacePage() {
             </div>
             <button
               onClick={() => { setDate(todayStr()); setTime('') }}
-              className="h-10 px-4 rounded-lg border border-ink-border text-ink-muted hover:text-white hover:bg-ink-subtle transition-all text-sm"
+              className="h-10 px-4 rounded-lg border border-ink-border text-ink-muted hover:text-primary hover:bg-ink-subtle transition-all text-sm"
             >
               Reset
             </button>
@@ -124,7 +124,7 @@ export function MarketplacePage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="glass-card p-14 flex flex-col items-center text-center animate-fade-up">
-          <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
+          <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center mb-4">
             <Store size={24} className="text-ink-muted" />
           </div>
           <h3 className="font-display font-600 text-lg mb-2">No venues found</h3>

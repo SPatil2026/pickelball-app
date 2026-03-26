@@ -62,7 +62,7 @@ export function Sidebar() {
                 'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-body font-medium transition-all duration-150',
                 isActive
                   ? 'text-ink font-semibold'
-                  : 'text-ink-muted hover:text-white hover:bg-ink-subtle'
+                  : 'text-ink-muted hover:text-primary hover:bg-ink-subtle'
               )}
               style={isActive ? { background: 'var(--accent)', color: 'var(--ink)' } : {}}
             >
@@ -80,7 +80,7 @@ export function Sidebar() {
           <p className="text-xs font-mono text-ink-muted uppercase tracking-widest">
             {user?.role ?? 'booker'}
           </p>
-          <p className="text-sm font-medium text-white truncate mt-0.5">{user?.name}</p>
+          <p className="text-sm font-medium text-primary truncate mt-0.5">{user?.name}</p>
           <p className="text-xs text-ink-muted truncate">{user?.email}</p>
         </div>
 

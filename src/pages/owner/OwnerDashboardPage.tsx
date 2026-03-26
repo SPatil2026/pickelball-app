@@ -94,7 +94,7 @@ export function OwnerDashboardPage() {
               <div key={i} className="glass-card p-5 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-mono text-ink-muted uppercase tracking-widest">{stat.label}</span>
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/5 text-ink-muted">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-primary/5 text-ink-muted">
                     <Icon size={16} />
                   </div>
                 </div>
@@ -114,17 +114,17 @@ export function OwnerDashboardPage() {
         <div className="lg:col-span-2 glass-card p-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="font-display font-700 text-lg">Recent Bookings</h2>
-            <button className="text-sm font-medium hover:text-white transition-colors" style={{ color: 'var(--accent)' }}>
+            <button className="text-sm font-medium hover:text-primary transition-colors" style={{ color: 'var(--accent)' }}>
               View all
             </button>
           </div>
 
           <div className="space-y-4">
             {recentBookings.map((booking) => (
-              <div key={booking.id} className="flex items-center justify-between p-4 rounded-xl border border-ink-border bg-ink-subtle hover:border-white/20 transition-all">
+              <div key={booking.id} className="flex items-center justify-between p-4 rounded-xl border border-ink-border bg-ink-subtle hover:border-primary/20 transition-all">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                    <Users size={16} className="text-white" />
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Users size={16} className="text-primary" />
                   </div>
                   <div>
                     <p className="font-medium text-sm">{booking.user}</p>
@@ -152,8 +152,8 @@ export function OwnerDashboardPage() {
               { label: 'Manage courts', desc: 'Update court availability', path: '/owner/manage-courts' },
               { label: 'View reports', desc: 'Monthly revenue & usage', path: '/owner/reports' },
             ].map((action, i) => (
-              <button key={i} className="w-full text-left p-4 rounded-xl border border-ink-border hover:bg-white/5 transition-colors group">
-                <p className="font-medium text-sm group-hover:text-white transition-colors">{action.label}</p>
+              <button key={i} className="w-full text-left p-4 rounded-xl border border-ink-border hover:bg-primary/5 transition-colors group">
+                <p className="font-medium text-sm group-hover:text-primary transition-colors">{action.label}</p>
                 <p className="text-xs text-ink-muted mt-0.5">{action.desc}</p>
               </button>
             ))}

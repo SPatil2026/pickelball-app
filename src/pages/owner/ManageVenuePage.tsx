@@ -252,13 +252,13 @@ export function ManageVenuePage() {
                   {!img.is_thumbnail && (
                     <button
                       onClick={() => handleSetThumbnail(img.image_id)}
-                      className="text-[10px] font-mono uppercase bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-full w-full max-w-[120px] backdrop-blur-md transition-colors"
+                      className="text-[10px] font-mono uppercase bg-primary/10 hover:bg-primary/20 text-primary px-3 py-1.5 rounded-full w-full max-w-[120px] backdrop-blur-md transition-colors"
                     >
                       Set Cover
                     </button>
                   )}
 
-                  <label className="text-[10px] font-mono uppercase bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-full w-full max-w-[120px] backdrop-blur-md transition-colors text-center cursor-pointer">
+                  <label className="text-[10px] font-mono uppercase bg-primary/10 hover:bg-primary/20 text-primary px-3 py-1.5 rounded-full w-full max-w-[120px] backdrop-blur-md transition-colors text-center cursor-pointer">
                     Replace
                     <input
                       type="file"
@@ -285,7 +285,7 @@ export function ManageVenuePage() {
             ))}
 
             {images.length < 5 && (
-              <label className="aspect-square rounded-xl border border-dashed border-ink-border hover:border-accent/50 hover:bg-white/5 transition-all flex flex-col items-center justify-center cursor-pointer relative">
+              <label className="aspect-square rounded-xl border border-dashed border-ink-border hover:border-accent/50 hover:bg-primary/5 transition-all flex flex-col items-center justify-center cursor-pointer relative">
                 <input
                   type="file"
                   multiple
@@ -382,7 +382,7 @@ export function ManageVenuePage() {
           <button
             onClick={handleDeleteVenue}
             disabled={deleting}
-            className="w-full mt-auto h-11 rounded-lg border border-red-500/30 text-red-500 flex items-center justify-center gap-2 font-medium hover:bg-red-500 hover:text-white transition-all disabled:opacity-50"
+            className="w-full mt-auto h-11 rounded-lg border border-red-500/30 text-red-500 flex items-center justify-center gap-2 font-medium hover:bg-red-500 hover:text-primary transition-all disabled:opacity-50"
           >
             {deleting ? (
               <span className="w-5 h-5 rounded-full border-2 border-current border-t-transparent animate-spin" />

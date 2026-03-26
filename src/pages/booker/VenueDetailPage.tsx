@@ -77,7 +77,7 @@ export function VenueDetailPage() {
       {/* Back button */}
       <button
         onClick={() => navigate('/booker/home')}
-        className="flex items-center gap-2 text-ink-muted hover:text-white transition-colors text-sm font-medium group"
+        className="flex items-center gap-2 text-ink-muted hover:text-primary transition-colors text-sm font-medium group"
       >
         <ArrowLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />
         Back to Marketplace

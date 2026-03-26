@@ -159,7 +159,7 @@ export function RegisterPage() {
                 <button
                   type="button"
                   onClick={() => setShowPw(!showPw)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted hover:text-primary transition-colors"
                 >
                   {showPw ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -181,7 +181,7 @@ export function RegisterPage() {
                       'flex flex-col items-start px-4 py-3 rounded-lg border text-sm font-medium transition-all duration-150',
                       role === r
                         ? 'border-transparent text-ink'
-                        : 'border-ink-border text-ink-muted hover:border-white/30 hover:text-white'
+                        : 'border-ink-border text-ink-muted hover:border-primary/30 hover:text-primary'
                     )}
                     style={role === r ? { background: 'var(--accent)' } : {}}
                   >
@@ -229,7 +229,7 @@ export function RegisterPage() {
 
           <p className="mt-6 text-center text-sm text-ink-muted">
             Already have an account?{' '}
-            <Link to="/login" className="font-medium hover:text-white transition-colors" style={{ color: 'var(--accent)' }}>
+            <Link to="/login" className="font-medium hover:text-primary transition-colors" style={{ color: 'var(--accent)' }}>
               Sign in
             </Link>
           </p>

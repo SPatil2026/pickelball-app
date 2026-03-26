@@ -14,9 +14,9 @@ export function CartPage() {
   const [removingId, setRemovingId] = useState<string | null>(null)
   const [clearing, setClearing] = useState(false)
 
-  const fetchCart = async () => {
+  const fetchCart = async (showLoading: boolean = true) => {
     try {
-      setLoading(true)
+      if (showLoading) setLoading(true)
       const data = await cartApi.getCart()
       // Handle both { cart, total_amount } and empty { items: [], total_amount: 0 } shapes
       if (data.cart) {
@@ -29,11 +29,17 @@ export function CartPage() {
     } catch {
       setError('Failed to load your cart.')
     } finally {
-      setLoading(false)
+      if (showLoading) setLoading(false)
     }
   }
 
-  useEffect(() => { fetchCart() }, [])
+  useEffect(() => { 
+    fetchCart() 
+    const interval = setInterval(() => {
+      fetchCart(false)
+    }, 10000)
+    return () => clearInterval(interval)
+  }, [])
 
   const handleRemove = async (cartItemId: string) => {
     setRemovingId(cartItemId)
@@ -64,6 +70,7 @@ export function CartPage() {
   }
 
   const items = cart?.items ?? []
+  const hasBookedItems = items.some(i => i.is_booked)
 
   return (
     <div className="p-8 max-w-4xl mx-auto space-y-8 animate-fade-up">
@@ -79,7 +86,7 @@ export function CartPage() {
           <button
             onClick={handleClearAll}
             disabled={clearing}
-            className="flex items-center gap-2 text-sm text-red-400 hover:text-red-300 transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 text-sm text-red-400 hover:text-red-600 transition-colors disabled:opacity-50"
           >
             {clearing
               ? <span className="w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin" />
@@ -92,7 +99,7 @@ export function CartPage() {
 
       {/* Error */}
       {error && (
-        <div className="px-4 py-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center gap-2">
+        <div className="px-4 py-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 text-sm flex items-center gap-2">
           <AlertCircle size={15} />
           {error}
         </div>
@@ -106,7 +113,7 @@ export function CartPage() {
         </div>
       ) : items.length === 0 ? (
         <div className="glass-card p-14 flex flex-col items-center text-center">
-          <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
+          <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center mb-4">
             <ShoppingCart size={24} className="text-ink-muted" />
           </div>
           <h3 className="font-display font-600 text-lg mb-2">Your cart is empty</h3>
@@ -122,19 +129,25 @@ export function CartPage() {
           {items.map((item) => (
             <div
               key={item.cart_item_id}
-              className="glass-card p-5 flex items-start gap-4 hover:border-white/15 transition-all"
+              className={`glass-card p-5 flex items-start gap-4 transition-all ${
+                item.is_booked ? 'border-red-400 bg-red-50/50' : 'hover:border-primary/15'
+              }`}
             >
               {/* Icon */}
-              <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0 mt-0.5">
-                <ShoppingCart size={16} className="text-accent" />
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${
+                item.is_booked ? 'bg-red-100 border border-red-200 text-red-500' : 'bg-accent/10 border border-accent/20 text-accent'
+              }`}>
+                <ShoppingCart size={16} />
               </div>
 
               {/* Info */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
-                  <p className="font-display font-600 text-base truncate">{item.court.venue.name}</p>
+                  <p className={`font-display font-600 text-base truncate ${item.is_booked ? 'text-ink-muted line-through' : 'text-primary'}`}>
+                    {item.court.venue.name}
+                  </p>
                   {item.price > 0 && (
-                    <span className="font-display font-600 text-sm text-accent shrink-0">₹{item.price}</span>
+                    <span className={`font-display font-600 text-sm shrink-0 ${item.is_booked ? 'text-ink-muted' : 'text-accent'}`}>₹{item.price}</span>
                   )}
                 </div>
                 <p className="text-xs text-ink-muted mt-0.5">Court {item.court.court_number}</p>
@@ -149,13 +162,19 @@ export function CartPage() {
                     {fmtDate(item.date)} · {fmtTime(item.start_time)} – {fmtTime(item.end_time)}
                   </span>
                 </div>
+                
+                {item.is_booked && (
+                  <div className="text-xs text-red-500 font-medium mt-3 flex items-center gap-1">
+                    <AlertCircle size={13} /> This slot is no longer available. Please remove it.
+                  </div>
+                )}
               </div>
 
               {/* Remove */}
               <button
                 onClick={() => handleRemove(item.cart_item_id)}
                 disabled={removingId === item.cart_item_id}
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-ink-muted hover:text-red-400 hover:bg-red-400/10 transition-all disabled:opacity-50 shrink-0"
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-ink-muted hover:text-red-500 hover:bg-red-50 transition-all disabled:opacity-50 shrink-0"
               >
                 {removingId === item.cart_item_id
                   ? <span className="w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin" />
@@ -174,13 +193,21 @@ export function CartPage() {
                 <span className="text-xs font-body font-normal text-ink-muted ml-1">incl. taxes</span>
               </p>
             </div>
-            <button
-              className="btn-primary h-12 px-8 gap-2 text-base"
-              onClick={() => navigate('/booker/checkout')}
-            >
-              Proceed to Checkout
-              <ArrowRight size={18} />
-            </button>
+            <div className="flex flex-col items-end gap-1">
+              <button
+                className="btn-primary h-12 px-8 gap-2 text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => navigate('/booker/checkout')}
+                disabled={hasBookedItems || items.length === 0}
+              >
+                Proceed to Checkout
+                <ArrowRight size={18} />
+              </button>
+              {hasBookedItems && (
+                <p className="text-xs text-red-500 font-medium mt-1 pr-1 text-right">
+                  Please remove unavailable items to continue.
+                </p>
+              )}
+            </div>
           </div>
         </div>
       )}

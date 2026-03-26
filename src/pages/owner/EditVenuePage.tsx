@@ -101,9 +101,9 @@ export function EditVenuePage() {
       <div className="flex items-center gap-4">
         <button
           onClick={() => navigate('/owner/venues')}
-          className="w-10 h-10 rounded-full bg-ink-subtle border border-ink-border flex items-center justify-center hover:bg-white/5 transition-colors"
+          className="w-10 h-10 rounded-full bg-ink-subtle border border-ink-border flex items-center justify-center hover:bg-primary/5 transition-colors"
         >
-          <ArrowLeft size={18} className="text-white" />
+          <ArrowLeft size={18} className="text-primary" />
         </button>
         <div>
           <h1 className="font-display font-700 text-3xl tracking-tight">Edit Venue</h1>

@@ -128,6 +128,20 @@ export const cartApi = {
 
   clearCart: () =>
     api.delete('/booker/cart/clear-all').then((r) => r.data),
+
+  checkout: () =>
+    api.post('/booker/cart/checkout').then((r) => r.data),
+}
+
+export const bookingsApi = {
+  getMyBookings: () =>
+    api.get('/booker/bookings').then((r) => r.data),
+
+  cancelBooking: (bookingId: string) =>
+    api.post(`/booker/bookings/${bookingId}/cancel`).then((r) => r.data),
+
+  rescheduleBooking: (bookingId: string, data: { date: string; start_time: string; end_time: string }) =>
+    api.post(`/booker/bookings/${bookingId}/reschedule`, data).then((r) => r.data),
 }
 
 export default api

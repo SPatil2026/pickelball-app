@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ShoppingCart, Trash2, MapPin, Clock, AlertCircle, ArrowRight } from 'lucide-react'
 import { cartApi } from '../../lib/api'
+import { fmtDate, fmtTime } from '../../components/FormatDateTime'
 
 interface CartItem {
   cart_item_id: string
   date: string
   start_time: string
   end_time: string
+  price: number
   court: {
     court_number: number
     venue: {
@@ -22,26 +24,10 @@ interface Cart {
   items: CartItem[]
 }
 
-const formatDate = (dt: string) => {
-  try {
-    return new Date(dt).toLocaleDateString('en-GB', {
-      weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
-    })
-  } catch { return dt }
-}
-
-const formatTime = (dt: string) => {
-  if (!dt) return ''
-  if (dt.includes('T')) {
-    const d = new Date(dt)
-    return `${d.getUTCHours().toString().padStart(2, '0')}:${d.getUTCMinutes().toString().padStart(2, '0')}`
-  }
-  return dt.slice(0, 5)
-}
-
 export function CartPage() {
   const navigate = useNavigate()
   const [cart, setCart] = useState<Cart | null>(null)
+  const [totalAmount, setTotalAmount] = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [removingId, setRemovingId] = useState<string | null>(null)
@@ -51,7 +37,14 @@ export function CartPage() {
     try {
       setLoading(true)
       const data = await cartApi.getCart()
-      setCart(data)
+      // Handle both { cart, total_amount } and empty { items: [], total_amount: 0 } shapes
+      if (data.cart) {
+        setCart(data.cart)
+        setTotalAmount(data.total_amount ?? 0)
+      } else {
+        setCart({ cart_id: '', items: data.items ?? [] })
+        setTotalAmount(data.total_amount ?? 0)
+      }
     } catch {
       setError('Failed to load your cart.')
     } finally {
@@ -72,6 +65,7 @@ export function CartPage() {
       setError('Failed to remove item.')
     } finally {
       setRemovingId(null)
+      fetchCart()
     }
   }
 
@@ -156,7 +150,12 @@ export function CartPage() {
 
               {/* Info */}
               <div className="flex-1 min-w-0">
-                <p className="font-display font-600 text-base truncate">{item.court.venue.name}</p>
+                <div className="flex items-start justify-between gap-2">
+                  <p className="font-display font-600 text-base truncate">{item.court.venue.name}</p>
+                  {item.price > 0 && (
+                    <span className="font-display font-600 text-sm text-accent shrink-0">₹{item.price}</span>
+                  )}
+                </div>
                 <p className="text-xs text-ink-muted mt-0.5">Court {item.court.court_number}</p>
 
                 <div className="flex flex-wrap gap-4 mt-2.5 text-xs text-ink-muted">
@@ -166,7 +165,7 @@ export function CartPage() {
                   </span>
                   <span className="flex items-center gap-1.5">
                     <Clock size={12} />
-                    {formatDate(item.date)} · {formatTime(item.start_time)} – {formatTime(item.end_time)}
+                    {fmtDate(item.date)} · {fmtTime(item.start_time)} – {fmtTime(item.end_time)}
                   </span>
                 </div>
               </div>
@@ -185,8 +184,15 @@ export function CartPage() {
             </div>
           ))}
 
-          {/* Checkout CTA */}
-          <div className="pt-4 border-t border-ink-border flex justify-end">
+          {/* Total + Checkout CTA */}
+          <div className="pt-4 border-t border-ink-border flex items-center justify-between gap-4">
+            <div>
+              <p className="text-xs text-ink-muted font-mono uppercase tracking-widest">Total</p>
+              <p className="font-display font-700 text-2xl mt-0.5">
+                ₹{totalAmount}
+                <span className="text-xs font-body font-normal text-ink-muted ml-1">incl. taxes</span>
+              </p>
+            </div>
             <button
               className="btn-primary h-12 px-8 gap-2 text-base"
               onClick={() => navigate('/booker/checkout')}

@@ -1,92 +1,82 @@
-# 🏓 PicklePark — Frontend
+# 🏓 PicklePark
 
-Pickleball court booking platform built with **Vite + React + TypeScript + Tailwind CSS**.
+A premium Pickleball court booking platform built for real-time play. **PicklePark** provides a seamless mobile-first experience for both players (Bookers) looking for a game and facility managers (Owners) managing their venues.
 
-## Stack
+---
 
-| Layer        | Choice                           |
-|--------------|----------------------------------|
-| Bundler      | Vite 5                           |
-| UI           | React 18 + TypeScript            |
-| Styling      | Tailwind CSS 3                   |
-| Routing      | React Router v6                  |
-| HTTP client  | Axios (proxy → `localhost:8000`) |
-| Icons        | Lucide React                     |
+## ✨ Key Features
 
-## Project Structure
+### 👤 For Bookers (Players)
+- **Marketplace Discovery**: Browse and search pickleball venues by name or location with real-time status.
+- **Visual Court Grid**: 10-slot color-coded grid for instant slot selection across multiple courts.
+- **Smart Cart & Validation**: Atomic 10-second polling to ensure slot availability before checkout.
+- **Booking Management**: 
+    - Full history view with active vs. completed filters.
+    - **Reschedule Flow**: 12-hour policy-aware rescheduling to new available slots.
+    - **Cancellation**: One-tap cancellation with policy warnings and confirmation.
+- **Mobile Responsive**: Sidebar transforms into a bottom navigation bar for a native-app feel on small screens.
 
-```
-src/
-├── contexts/
-│   └── AuthContext.tsx      # Auth state, login/register/logout
-├── lib/
-│   └── api.ts               # Axios instance + authApi calls
-├── types/
-│   └── index.ts             # Shared TypeScript types
-├── components/
-│   ├── ProtectedRoute.tsx   # Guards for authenticated routes
-│   └── layout/
-│       ├── AppLayout.tsx    # Shell with sidebar
-│       └── Sidebar.tsx      # Nav sidebar
-├── pages/
-│   ├── LoginPage.tsx
-│   ├── RegisterPage.tsx
-│   ├── DashboardPage.tsx
-│   └── PlaceholderPages.tsx # Courts / History / Marketplace / Settings
-├── App.tsx                  # Route definitions
-├── main.tsx
-└── index.css                # Tailwind + custom design tokens
-```
+### 💼 For Owners (Managers)
+- **Revenue Dashboard**: Real-time stats on total venues, active courts, booking volume, and MTD revenue.
+- **Venue Management**: Add, edit, and manage venues with image galleries and operating hours.
+- **Court Control**: Dynamically add or remove courts from any venue.
+- **Pricing Engine**: Configure separate weekday and weekend pricing per hour.
+- **Booking Tracker**: Global view of all reservations across all managed locations.
 
-## Getting Started
+---
 
+## 🛠️ Tech Stack
+
+| Layer | Choice |
+| :--- | :--- |
+| **Frontend** | React 18 + TypeScript + Vite |
+| **Backend** | Node.js + Express + Prisma ORM |
+| **Styling** | Tailwind CSS 3 (Custom Warm Light Theme) |
+| **Navigation** | React Router v6 |
+| **State/Data** | Context API + Axios (with auto-auth interceptors) |
+| **Icons** | Lucide React |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Installation
+Clone the repository and install the dependencies:
 ```bash
-# 1. Install dependencies
 npm install
+```
 
-# 2. Start dev server (proxies /api → http://localhost:8000)
+### 2. Run Development Server
+The frontend is configured to proxy `/api/*` requests to `localhost:8000`.
+```bash
 npm run dev
 ```
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-App runs at **http://localhost:5173**
+### 3. Environment Setup
+Create a `.env` in the backend root with:
+- `DATABASE_URL`: Your PostgreSQL connection string.
+- `JWT_SECRET`: A secure string for token signing.
 
-## API Proxy
+---
 
-`vite.config.ts` proxies all `/api/*` requests to your backend:
+## 🎨 Design System
 
-```
-/api/auth/register  → POST http://localhost:8000/api/auth/register
-/api/auth/login     → POST http://localhost:8000/api/auth/login
-/api/auth/logout    → POST http://localhost:8000/api/auth/logout
-```
+PicklePark uses a custom-tailored **Warm Light Theme** defined in `tailwind.config.js` and `index.css`:
 
-The Axios instance in `src/lib/api.ts`:
-- Attaches `Authorization: Bearer <token>` from `localStorage` automatically
-- Redirects to `/login` on any `401` response
+- **Page BG**: `#FAF6F1` (Cream)
+- **Cards**: `#FFFFFF` (Pure White)
+- **Primary**: `#2D1F14` (Deep Umber)
+- **Accent**: `#C85A38` (Burnt Sienna)
+- **Support**: `#4A7C6F` (Forest Green)
 
-## Auth Flow
+---
 
-1. **Register** — `POST /api/auth/register` → stores `{ user, token }` in `localStorage`
-2. **Login** — `POST /api/auth/login` → same
-3. **Logout** — `POST /api/auth/logout` (protected) → clears storage, redirects to `/login`
+## 📂 Project Structure
 
-## Routes
-
-| Path           | Access    | Page               |
-|----------------|-----------|--------------------|
-| `/login`       | Public    | Login              |
-| `/register`    | Public    | Register           |
-| `/dashboard`   | Protected | Dashboard          |
-| `/courts`      | Protected | Book Courts (stub) |
-| `/history`     | Protected | Bookings (stub)    |
-| `/marketplace` | Protected | Marketplace (stub) |
-| `/settings`    | Protected | Settings (stub)    |
-
-## Next Steps
-
-- [ ] Court grid page with 3-court colour-coded slots
-- [ ] Multi-slot cart & checkout flow
-- [ ] Booking history with rescheduling
-- [ ] Marketplace with venue cards & availability filters
-- [ ] Owner dashboard for venue creation & management
-- [ ] Photo upload integration
+- `src/components/`: Reusable UI elements (Cards, Sidebar, Layout).
+- `src/pages/booker/`: Player-facing pages (Marketplace, Booking Grid, History, Reschedule).
+- `src/pages/owner/`: Management pages (Dashboard, Venue Editor, Court Manager).
+- `src/contexts/`: Shared global state (Auth).
+- `src/lib/`: API configuration and specialized logic.
+- `src/types/`: Centralized TypeScript interfaces.

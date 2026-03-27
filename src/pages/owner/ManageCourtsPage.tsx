@@ -82,7 +82,7 @@ export function ManageCourtsPage() {
   const selectedVenue = venues.find(v => v.venue_id === selectedVenueId)
 
   return (
-    <div className="p-8 max-w-4xl mx-auto space-y-8">
+    <div className="p-4 sm:p-8 max-w-4xl mx-auto space-y-6 sm:space-y-8">
       <div className="animate-fade-up stagger-1">
         <h1 className="font-display font-700 text-3xl tracking-tight">Manage Courts</h1>
         <p className="text-ink-muted mt-1 text-sm">Add or remove courts from your venues.</p>

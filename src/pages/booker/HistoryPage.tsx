@@ -24,12 +24,11 @@ export function HistoryPage() {
   const tabs: Array<{ key: typeof filter; label: string }> = [
     { key: 'ALL', label: 'All' },
     { key: 'CONFIRMED', label: 'Confirmed' },
-    { key: 'RESCHEDULED', label: 'Rescheduled' },
     { key: 'CANCELLED', label: 'Cancelled' },
   ]
 
   return (
-    <div className="p-8 max-w-4xl mx-auto space-y-8 animate-fade-up">
+    <div className="p-4 sm:p-8 max-w-4xl mx-auto space-y-6 sm:space-y-8 animate-fade-up">
       {/* Header */}
       <div className="stagger-1">
         <h1 className="font-display font-700 text-3xl tracking-tight">My Bookings</h1>
@@ -37,7 +36,7 @@ export function HistoryPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 p-1 rounded-xl bg-ink-subtle border border-ink-border w-fit">
+      <div className="flex gap-1 p-1 rounded-xl bg-ink-subtle border border-ink-border overflow-x-auto w-fit max-w-full">
         {tabs.map(({ key, label }) => (
           <button
             key={key}

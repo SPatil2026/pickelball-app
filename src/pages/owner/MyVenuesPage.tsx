@@ -40,9 +40,9 @@ export function MyVenuesPage() {
   }
 
   return (
-    <div className="p-8 max-w-6xl mx-auto space-y-8">
+    <div className="p-4 sm:p-8 max-w-6xl mx-auto space-y-6 sm:space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between animate-fade-up stagger-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-fade-up stagger-1">
         <div>
           <h1 className="font-display font-700 text-3xl tracking-tight">My Venues</h1>
           <p className="text-ink-muted mt-1 text-sm">Manage all your registered pickleball locations.</p>

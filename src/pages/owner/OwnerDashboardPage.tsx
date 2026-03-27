@@ -1,5 +1,5 @@
 import { ownerApi } from '../../lib/api'
-import { Users, TrendingUp, Calendar as CalendarIcon, MapPin, Zap } from 'lucide-react'
+import { TrendingUp, Calendar as CalendarIcon, MapPin, Zap } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 
@@ -14,12 +14,6 @@ interface Dashboard {
     };
   };
 }
-
-const recentBookings = [
-  { id: '1', user: 'Rahul Sharma', venue: 'Ace Pickleball', time: 'Today, 18:00 - 19:30', amount: '₹450', status: 'confirmed' },
-  { id: '2', user: 'Priya Patel', venue: 'Ace Pickleball', time: 'Today, 19:30 - 21:00', amount: '₹450', status: 'confirmed' },
-  { id: '3', user: 'Amit Kumar', venue: 'Downtown Courts', time: 'Tomorrow, 07:00 - 08:00', amount: '₹300', status: 'pending' },
-]
 
 export function OwnerDashboardPage() {
   const [dashboard, setDashboard] = useState<Dashboard>({
@@ -69,7 +63,7 @@ export function OwnerDashboardPage() {
   ]
 
   return (
-    <div className="p-8 max-w-6xl mx-auto space-y-8">
+    <div className="p-4 sm:p-8 max-w-6xl mx-auto space-y-6 sm:space-y-8">
       {/* Header */}
       <div className="animate-fade-up stagger-1">
         <h1 className="font-display font-700 text-3xl tracking-tight">Owner Dashboard</h1>
@@ -108,58 +102,6 @@ export function OwnerDashboardPage() {
         </div>
       )}
 
-      {/* Main Content Area */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-up stagger-3">
-        {/* Recent Bookings */}
-        <div className="lg:col-span-2 glass-card p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="font-display font-700 text-lg">Recent Bookings</h2>
-            <button className="text-sm font-medium hover:text-primary transition-colors" style={{ color: 'var(--accent)' }}>
-              View all
-            </button>
-          </div>
-
-          <div className="space-y-4">
-            {recentBookings.map((booking) => (
-              <div key={booking.id} className="flex items-center justify-between p-4 rounded-xl border border-ink-border bg-ink-subtle hover:border-primary/20 transition-all">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Users size={16} className="text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-sm">{booking.user}</p>
-                    <p className="text-xs text-ink-muted mt-0.5">{booking.venue} · {booking.time}</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className="font-display font-600">{booking.amount}</p>
-                  <span className="tag text-[10px] px-2 py-0.5 mt-1 inline-block"
-                    style={booking.status === 'confirmed' ? { background: 'rgba(184,255,87,0.12)', color: 'var(--accent)' } : { background: 'rgba(255,255,255,0.1)', color: 'white' }}>
-                    {booking.status}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="glass-card p-6">
-          <h2 className="font-display font-700 text-lg mb-6">Quick Actions</h2>
-          <div className="space-y-3">
-            {[
-              { label: 'Add new venue', desc: 'List another location', path: '/owner/add-venue' },
-              { label: 'Manage courts', desc: 'Update court availability', path: '/owner/manage-courts' },
-              { label: 'View reports', desc: 'Monthly revenue & usage', path: '/owner/reports' },
-            ].map((action, i) => (
-              <button key={i} className="w-full text-left p-4 rounded-xl border border-ink-border hover:bg-primary/5 transition-colors group">
-                <p className="font-medium text-sm group-hover:text-primary transition-colors">{action.label}</p>
-                <p className="text-xs text-ink-muted mt-0.5">{action.desc}</p>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
     </div>
   )
 }

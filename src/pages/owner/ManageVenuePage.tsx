@@ -135,7 +135,7 @@ export function ManageVenuePage() {
 
   if (!venue) {
     return (
-      <div className="p-8 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[50vh] text-center">
+      <div className="p-4 sm:p-8 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[50vh] text-center">
         <h2 className="font-display font-700 text-2xl tracking-tight mb-2">Venue Not Found</h2>
         <p className="text-ink-muted text-sm max-w-xs">{error || "The venue you are looking for does not exist."}</p>
         <button onClick={() => navigate('/owner/venues')} className="mt-6 btn-primary h-10 px-6">
@@ -198,7 +198,7 @@ export function ManageVenuePage() {
 
   return (
 
-    <div className="p-8 max-w-4xl mx-auto space-y-8 animate-fade-up">
+    <div className="p-4 sm:p-8 max-w-4xl mx-auto space-y-6 sm:space-y-8 animate-fade-up">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="font-display font-700 text-3xl tracking-tight">{venue.name}</h1>

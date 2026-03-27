@@ -46,7 +46,7 @@ export function CheckoutPage() {
   // ── Success screen ──
   if (success) {
     return (
-      <div className="p-8 max-w-lg mx-auto flex flex-col items-center text-center min-h-[70vh] justify-center gap-6 animate-fade-up">
+      <div className="p-4 sm:p-8 max-w-lg mx-auto flex flex-col items-center text-center min-h-[70vh] justify-center gap-6 animate-fade-up">
         <div
           className="w-20 h-20 rounded-full flex items-center justify-center"
           style={{ background: 'rgba(184,255,87,0.15)', border: '1px solid rgba(184,255,87,0.3)' }}
@@ -59,7 +59,7 @@ export function CheckoutPage() {
             Your court slots have been reserved. You can view your upcoming bookings below.
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
           <button onClick={() => navigate('/booker/history')} className="btn-primary h-11 px-6 gap-2">
             My Bookings <ArrowRight size={16} />
           </button>
@@ -72,7 +72,7 @@ export function CheckoutPage() {
   }
 
   return (
-    <div className="p-8 max-w-3xl mx-auto space-y-8 animate-fade-up">
+    <div className="p-4 sm:p-8 max-w-3xl mx-auto space-y-6 sm:space-y-8 animate-fade-up">
       {/* Back */}
       <button
         onClick={() => navigate('/booker/cart')}

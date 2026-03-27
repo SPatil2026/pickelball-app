@@ -73,7 +73,7 @@ export function CartPage() {
   const hasBookedItems = items.some(i => i.is_booked)
 
   return (
-    <div className="p-8 max-w-4xl mx-auto space-y-8 animate-fade-up">
+    <div className="p-4 sm:p-8 max-w-4xl mx-auto space-y-6 sm:space-y-8 animate-fade-up">
       {/* Header */}
       <div className="flex items-center justify-between stagger-1">
         <div>
@@ -185,7 +185,7 @@ export function CartPage() {
           ))}
 
           {/* Total + Checkout CTA */}
-          <div className="pt-4 border-t border-ink-border flex items-center justify-between gap-4">
+          <div className="pt-4 border-t border-ink-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <p className="text-xs text-ink-muted font-mono uppercase tracking-widest">Total</p>
               <p className="font-display font-700 text-2xl mt-0.5">

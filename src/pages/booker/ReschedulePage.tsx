@@ -104,7 +104,7 @@ export function ReschedulePage() {
 
     if (!booking) {
         return (
-            <div className="p-8 max-w-4xl mx-auto flex flex-col items-center glass-card mt-12 gap-4">
+            <div className="p-4 sm:p-8 max-w-3xl mx-auto flex flex-col items-center glass-card mt-12 gap-4">
                <AlertCircle size={24} className="text-red-500 mt-4" /> 
                <p className="mb-4">{error || 'Booking not found.'}</p>
                <button onClick={() => navigate('/booker/history')} className="btn-ghost mb-8">Back to History</button>
@@ -115,7 +115,7 @@ export function ReschedulePage() {
     const courtNumber = booking.court.court_number
 
     return (
-        <div className="p-8 max-w-3xl mx-auto space-y-8 animate-fade-up">
+        <div className="p-4 sm:p-8 max-w-3xl mx-auto space-y-6 sm:space-y-8 animate-fade-up">
             {/* Back */}
             <button
                 onClick={() => navigate('/booker/history')}

@@ -17,6 +17,11 @@ interface TimeSlot {
 }
 
 const todayStr = () => new Date().toISOString().slice(0, 10)
+const maxDateStr = () => {
+    const d = new Date()
+    d.setDate(d.getDate() + 7)
+    return d.toISOString().slice(0, 10)
+}
 
 const STATUS_STYLE: Record<string, string> = {
     AVAILABLE: 'border-accent/40 bg-accent/10 text-accent hover:bg-accent hover:text-ink cursor-pointer',
@@ -143,12 +148,13 @@ export function BookingPage() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <CalendarDays size={16} className="text-ink-muted shrink-0" />
+                    {/* <CalendarDays size={16} className="text-ink-muted shrink-0" /> */}
                     <input
                         type="date"
                         className="input-field h-10 py-0"
                         value={date}
                         min={todayStr()}
+                        max={maxDateStr()}
                         onChange={(e) => setDate(e.target.value)}
                     />
                 </div>

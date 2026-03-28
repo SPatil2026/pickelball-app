@@ -4,8 +4,13 @@ import { bookerApi } from '../../lib/api'
 import { VenueCard } from '../../components/VenueCard'
 import { Venue } from '@/types'
 
-// Today as YYYY-MM-DD
+// Today and MaxDate as YYYY-MM-DD
 const todayStr = () => new Date().toISOString().slice(0, 10)
+const maxDateStr = () => {
+  const d = new Date()
+  d.setDate(d.getDate() + 7)
+  return d.toISOString().slice(0, 10)
+}
 
 export function MarketplacePage() {
 
@@ -90,6 +95,8 @@ export function MarketplacePage() {
                 type="date"
                 className="input-field h-10 py-0"
                 value={date}
+                min={todayStr()}
+                max={maxDateStr()}
                 onChange={(e) => setDate(e.target.value)}
               />
             </div>

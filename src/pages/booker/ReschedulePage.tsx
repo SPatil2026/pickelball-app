@@ -17,6 +17,11 @@ interface TimeSlot {
 }
 
 const todayStr = () => new Date().toISOString().slice(0, 10)
+const maxDateStr = () => {
+    const d = new Date()
+    d.setDate(d.getDate() + 7)
+    return d.toISOString().slice(0, 10)
+}
 
 const STATUS_STYLE: Record<string, string> = {
     AVAILABLE: 'border-accent/40 bg-accent/10 text-accent hover:bg-accent hover:text-ink cursor-pointer',
@@ -36,7 +41,7 @@ export function ReschedulePage() {
     const [date, setDate] = useState(todayStr())
     const [slots, setSlots] = useState<TimeSlot[]>([])
     const [loadingSlots, setLoadingSlots] = useState(false)
-    
+
     const [selectedSlot, setSelectedSlot] = useState<{ date: string; start_time: string; end_time: string } | null>(null)
 
     const [submitting, setSubmitting] = useState(false)
@@ -105,9 +110,9 @@ export function ReschedulePage() {
     if (!booking) {
         return (
             <div className="p-4 sm:p-8 max-w-3xl mx-auto flex flex-col items-center glass-card mt-12 gap-4">
-               <AlertCircle size={24} className="text-red-500 mt-4" /> 
-               <p className="mb-4">{error || 'Booking not found.'}</p>
-               <button onClick={() => navigate('/booker/history')} className="btn-ghost mb-8">Back to History</button>
+                <AlertCircle size={24} className="text-red-500 mt-4" />
+                <p className="mb-4">{error || 'Booking not found.'}</p>
+                <button onClick={() => navigate('/booker/history')} className="btn-ghost mb-8">Back to History</button>
             </div>
         )
     }
@@ -136,8 +141,8 @@ export function ReschedulePage() {
                 <span className="text-xs font-mono uppercase text-ink-muted tracking-widest">Current Slot</span>
                 <p className="font-display font-600 text-lg">{booking.court.venue.name} — Court {courtNumber}</p>
                 <div className="flex flex-wrap gap-4 text-sm text-ink-muted">
-                    <span className="flex items-center gap-1.5"><CalendarDays size={14}/>{fmtDate(booking.date)}</span>
-                    <span className="flex items-center gap-1.5"><Clock size={14}/>{fmtTime(booking.start_time)} – {fmtTime(booking.end_time)}</span>
+                    <span className="flex items-center gap-1.5"><CalendarDays size={14} />{fmtDate(booking.date)}</span>
+                    <span className="flex items-center gap-1.5"><Clock size={14} />{fmtTime(booking.start_time)} – {fmtTime(booking.end_time)}</span>
                 </div>
             </div>
 
@@ -151,6 +156,7 @@ export function ReschedulePage() {
                         className="input-field h-10 py-0 w-auto"
                         value={date}
                         min={todayStr()}
+                        max={maxDateStr()}
                         onChange={(e) => setDate(e.target.value)}
                     />
                 </div>
@@ -159,7 +165,7 @@ export function ReschedulePage() {
             {/* Error */}
             {error && (
                 <div className="px-4 py-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 text-sm flex items-center gap-2">
-                    <AlertCircle size={15}/> {error}
+                    <AlertCircle size={15} /> {error}
                 </div>
             )}
 

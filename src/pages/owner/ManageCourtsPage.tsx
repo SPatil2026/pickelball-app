@@ -60,7 +60,7 @@ export function ManageCourtsPage() {
       // Refresh venues to get new court list
       await fetchVenues()
     } catch (err: any) {
-      setActionError(err.response?.data?.message || err.response?.data?.msg || 'Failed to add court.')
+      setActionError(err.response?.data?.message || 'Failed to add court.')
     } finally {
       setAddingCourt(false)
     }

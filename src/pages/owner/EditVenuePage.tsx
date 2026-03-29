@@ -83,7 +83,7 @@ export function EditVenuePage() {
       await ownerApi.updateVenue(id, payload)
       navigate('/owner/venues')
     } catch (err: any) {
-      setError(err.response?.data?.msg || 'Failed to update venue. Please try again.')
+      setError(err.response?.data?.message || 'Failed to update venue. Please try again.')
       setSaving(false)
     }
   }

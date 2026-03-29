@@ -25,7 +25,7 @@ export function LoginPage() {
       else navigate('/booker/home')
     } catch (err: unknown) {
       const msg =
-        (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??
+        (err as any)?.response?.data?.message ??
         'Invalid credentials. Please try again.'
       setError(msg)
     } finally {

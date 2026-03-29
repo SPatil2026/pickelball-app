@@ -26,7 +26,7 @@ export function MyVenuesPage() {
         const res = await ownerApi.getVenues()
         setVenues(res.venues || [])
       } catch (err: any) {
-        setError(err.response?.data?.msg || 'Failed to load venues. Please try again.')
+        setError(err.response?.data?.message || 'Failed to load venues. Please try again.')
       } finally {
         setLoading(false)
       }

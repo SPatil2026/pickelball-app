@@ -35,7 +35,7 @@ export function MarketplacePage() {
       const data = await bookerApi.getVenues(Object.keys(params).length ? params : undefined)
       setVenues(Array.isArray(data) ? data : [])
     } catch (err: any) {
-      setError(err.response?.data?.msg || 'Failed to load venues. Please try again.')
+      setError(err.response?.data?.message || 'Failed to load venues. Please try again.')
     } finally {
       setLoading(false)
     }

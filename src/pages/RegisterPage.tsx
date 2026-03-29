@@ -28,7 +28,7 @@ export function RegisterPage() {
       else navigate('/booker/home')
     } catch (err: unknown) {
       const msg =
-        (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??
+        (err as any)?.response?.data?.message ||
         'Registration failed. Please try again.'
       setError(msg)
     } finally {

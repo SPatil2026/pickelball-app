@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, ShoppingCart, CalendarDays, CheckCircle } from 'lucide-react'
+import { ArrowLeft, ShoppingCart, CheckCircle } from 'lucide-react'
 import { bookerApi, cartApi } from '../../lib/api'
 import { fmtTime } from '../../components/FormatDateTime'
 
